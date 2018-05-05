@@ -210,6 +210,7 @@ WS                      [ \t\r\n]
 <*>{
 "<"                     { XX(OnLT, yytext, 0);}
 ">"                     { XX(OnGT, yytext, 0);}
+"&"                     { XX(OnAMP, yytext, 0);}
 \n|.                    { XX(OnText, yytext, 0);}
 }
 

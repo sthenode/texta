@@ -358,7 +358,7 @@ const char *skel[]
   "#ifndef yyLexer",
   "%yIsLexer",
   "%yLexer",
-  "#include <yylexer.hxx>",
+  "#include \"yylexer.hxx\"",
   "#endif",
   "%*",
   "",
