@@ -61,19 +61,112 @@ public:
 protected:
     int run(int argc, char_t **argv, char_t **env) {
         int err = 0;
+        OnBeforeAll();
         _lexer.yylex();
+        OnAfterAll();
         return err;
     }
     
-    /*virtual eError OnToken
-    (const char* text, int token=-1, int beginchars=0, int endchars=0) {
+    virtual eError OnBeforeAll() {
         eError error = e_ERROR_NONE;
+        this->out
+        ("<html><head><style type=\"text/css\">"
+         "body { background-color: #ffffee; }"
+         "a.include {color: maroon; text-decoration: underline; }"
+         "font.include {color: maroon; }"
+         "font.comment {color: green; font-style:italic; }"
+         "font.commenteol {color: teal; font-style:italic; }"
+         "font.processor {color: purple; font-weight: bolder; }"
+         "font.keyword {color: blue; font-weight: bolder; }"
+         "font.keywordx {color: purple; font-weight: bolder; }"
+         "font.keywordy {color: purple; font-weight: bolder; }"
+         "font.string {color: maroon; }"
+         "font.char {color: red; }"
+         "</style>"
+         "<script type=\"text/JavaScript\">"
+         "</script>"
+         "</head><body><pre>");
+        return error;
+    }
+    virtual eError OnAfterAll() {
+        eError error = e_ERROR_NONE;
+        this->out("</pre></body></html>");
+        return error;
+    }
+
+    virtual eError OnBeginComment
+    (const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        this->out("<font class=\"comment\">");
         this->out(text);
         return error;
-    }*/
+    }
+    virtual eError OnEndComment
+    (const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        this->out(text);
+        this->out("</font>");
+        return error;
+    }
+    virtual eError OnReserved
+    (const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        this->out("<font class=\"keyword\">");
+        this->out(text);
+        this->out("</font>");
+        return error;
+    }
+    virtual eError OnString
+    (const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        this->out("<font class=\"string\">");
+        this->out(text);
+        this->out("</font>");
+        return error;
+    }
+    virtual eError OnChar
+    (const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        this->out("<font class=\"char\">");
+        this->out(text);
+        this->out("</font>");
+        return error;
+    }
+    virtual eError OnProcessor
+    (const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        this->out("<font class=\"processor\">");
+        this->out(text);
+        this->out("</font>");
+        return error;
+    }
+    virtual eError OnIncludeL
+    (const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        this->out("<font class=\"include\">");
+        this->out(text);
+        this->out("</font>");
+        return error;
+    }
     virtual eError OnText(const char* text, int token=-1) {
         eError error = e_ERROR_NONE;
         this->out(text);
+        return error;
+    }
+
+    virtual eError OnLT(const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        error = OnText("&lt;", token);
+        return error;
+    }
+    virtual eError OnGT(const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        error = OnText("&gt;", token);
+        return error;
+    }
+    virtual eError OnAMP(const char* text, int token=-1) {
+        eError error = e_ERROR_NONE;
+        error = OnText("&amp;", token);
         return error;
     }
 

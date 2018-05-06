@@ -43,6 +43,15 @@ class cLexerDelegateT {
 public:
     typedef TDerives cDelegate;
 
+    virtual eError OnBeforeAll() {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+    virtual eError OnAfterAll() {
+        eError error = e_ERROR_NONE;
+        return error;
+    }
+
     virtual eError OnCharToken
     (const char* text, int token=-1,
      int beginchars=1, int endchars=1) 
@@ -311,7 +320,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnBeginCommentX(text, token);
-        else error = OnBegin(text, token);
+        else error = OnBeginComment(text, token);
         return error;
     }
     virtual eError OnEndCommentX
@@ -322,7 +331,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnEndCommentX(text, token);
-        else error = OnEnd(text, token);
+        else error = OnEndComment(text, token);
         return error;
     }
     virtual eError OnBeginCommentLN
@@ -333,7 +342,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnBeginCommentLN(text, token);
-        else error = OnBegin(text, token);
+        else error = OnBeginComment(text, token);
         return error;
     }
     virtual eError OnEndCommentLN
@@ -344,7 +353,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnEndCommentLN(text, token);
-        else error = OnEnd(text, token);
+        else error = OnEndComment(text, token);
         return error;
     }
 
@@ -485,6 +494,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnBeginProcessor(text, token);
+        else error = OnBegin(text, token);
         return error;
     }
     virtual eError OnEndProcessor
@@ -506,6 +516,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnBeginProcessorX(text, token);
+        else error = OnBeginProcessor(text, token);
         return error;
     }
     virtual eError OnEndProcessorX
@@ -516,7 +527,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnEndProcessorX(text, token);
-        else error = OnEnd(text, token);
+        else error = OnEndProcessor(text, token);
         return error;
     }
 
@@ -696,7 +707,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnProcessorX(text, token);
-        else error = OnText(text, token);
+        else error = OnProcessor(text, token);
         return error;
     }
     virtual eError OnDefine
@@ -759,7 +770,7 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnReservedX(text, token);
-        else error = OnText(text, token);
+        else error = OnReserved(text, token);
         return error;
     }
     virtual eError OnReservedY
@@ -770,9 +781,10 @@ public:
         cDelegate* m_delegate = 0; DBT(("..."));
         if ((m_delegate = GetDelegate()))
             error = m_delegate->OnReservedY(text, token);
-        else error = OnText(text, token);
+        else error = OnReserved(text, token);
         return error;
     }
+
     virtual eError OnString
     (const char* text,
      int token=-1) 

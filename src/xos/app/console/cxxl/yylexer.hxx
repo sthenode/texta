@@ -46,7 +46,7 @@
  * #undef yyIsLexer
  * #undef yyDirivedLexer
  * #define yyIsLexer xxIsLexer
- *  #define yyDerivedLexer yyLexer
+ * #define yyDerivedLexer yyLexer
  * #include <yylexer.hpp>
  *
  *  class yyLexer: public yyIsLexer
