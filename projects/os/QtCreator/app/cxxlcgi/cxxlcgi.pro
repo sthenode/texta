@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2018 $organization$
+# Copyright (c) 1988-2019 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,65 +13,65 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: cxxl.pro
+#   File: cxxlcgi.pro
 #
 # Author: $author$
-#   Date: 5/2/2018
+#   Date: 9/11/2019
 #
-# QtCreator .pro file for texta executable cxxl
+# QtCreator .pro file for texta executable cxxlcgi
 ########################################################################
 include(../../../../../build/QtCreator/texta.pri)
 include(../../../../QtCreator/texta.pri)
 include(../../texta.pri)
 include(../../../../QtCreator/lib/libcxxl/libcxxl.pri)
-include(../../../../QtCreator/app/cxxl/cxxl.pri)
+include(../../../../QtCreator/app/cxxlcgi/cxxlcgi.pri)
 
-TARGET = $${cxxl_TARGET}
+TARGET = $${cxxlcgi_TARGET}
 
 ########################################################################
 # INCLUDEPATH
 #
 INCLUDEPATH += \
-$${cxxl_INCLUDEPATH} \
+$${cxxlcgi_INCLUDEPATH} \
 
 # DEFINES
 # 
 DEFINES += \
-$${cxxl_DEFINES} \
+$${cxxlcgi_DEFINES} \
 
 ########################################################################
 # OBJECTIVE_HEADERS
 #
 OBJECTIVE_HEADERS += \
-$${cxxl_OBJECTIVE_HEADERS} \
+$${cxxlcgi_OBJECTIVE_HEADERS} \
 
 # OBJECTIVE_SOURCES
 #
-SOURCES += \
-$${cxxl_OBJECTIVE_SOURCES} \
+OBJECTIVE_SOURCES += \
+$${cxxlcgi_OBJECTIVE_SOURCES} \
 
 ########################################################################
 # HEADERS
 #
 HEADERS += \
-$${cxxl_HEADERS} \
+$${cxxlcgi_HEADERS} \
+$${OBJECTIVE_HEADERS} \
 
 # SOURCES
 #
 SOURCES += \
-$${cxxl_SOURCES} \
-$${OBJECTIVE_SOURCES} \
+$${cxxlcgi_SOURCES} \
 
 ########################################################################
 # FRAMEWORKS
 #
 FRAMEWORKS += \
-$${cxxl_FRAMEWORKS} \
+$${cxxlcgi_FRAMEWORKS} \
 
 # LIBS
 #
 LIBS += \
-$${cxxl_LIBS} \
+$${cxxlcgi_LIBS} \
 $${FRAMEWORKS} \
 
 

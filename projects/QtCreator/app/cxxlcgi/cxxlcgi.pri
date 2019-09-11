@@ -1,5 +1,5 @@
 ########################################################################
-# Copyright (c) 1988-2018 $organization$
+# Copyright (c) 1988-2019 $organization$
 #
 # This software is provided by the author and contributors ``as is''
 # and any express or implied warranties, including, but not limited to,
@@ -13,68 +13,70 @@
 # or otherwise) arising in any way out of the use of this software,
 # even if advised of the possibility of such damage.
 #
-#   File: cxxl.pri
+#   File: cxxlcgi.pri
 #
 # Author: $author$
-#   Date: 5/2/2018
+#   Date: 9/11/2019
 #
-# QtCreator .pri file for texta executable cxxl
+# QtCreator .pri file for texta executable cxxlcgi
 ########################################################################
 
 ########################################################################
-# cxxl
+# cxxlcgi
 
-# cxxl TARGET
+# cxxlcgi TARGET
 #
-cxxl_TARGET = cxxl
+cxxlcgi_TARGET = cxxlcgi
 
-# cxxl INCLUDEPATH
+# cxxlcgi INCLUDEPATH
 #
-cxxl_INCLUDEPATH += \
+cxxlcgi_INCLUDEPATH += \
 $${texta_INCLUDEPATH} \
 
-# cxxl DEFINES
+# cxxlcgi DEFINES
 #
-cxxl_DEFINES += \
+cxxlcgi_DEFINES += \
 $${texta_DEFINES} \
 
 ########################################################################
-# cxxl OBJECTIVE_HEADERS
+# cxxlcgi OBJECTIVE_HEADERS
 #
-#cxxl_OBJECTIVE_HEADERS += \
+#cxxlcgi_OBJECTIVE_HEADERS += \
 #$${TEXTA_SRC}/texta/base/Base.hh \
 
-# cxxl OBJECTIVE_SOURCES
+# cxxlcgi OBJECTIVE_SOURCES
 #
-#cxxl_OBJECTIVE_SOURCES += \
+#cxxlcgi_OBJECTIVE_SOURCES += \
 #$${TEXTA_SRC}/texta/base/Base.mm \
 
 ########################################################################
-# cxxl HEADERS
+# cxxlcgi HEADERS
 #
-cxxl_HEADERS += \
+cxxlcgi_HEADERS += \
 $${CRONO_SRC}/xos/console/logger.hpp \
 $${FILA_SRC}/xos/console/main_main.hpp \
 \
 $${libcxxl_HEADERS} \
-$${TEXTA_SRC}/xos/app/console/cxxl/cmain.hxx \
+$${TEXTA_SRC}/xos/app/console/cxxl/ccgimain.hxx \
 
-# cxxl SOURCES
+# cxxlcgi SOURCES
 #
-cxxl_SOURCES += \
+cxxlcgi_SOURCES += \
 $${CRONO_SRC}/xos/console/logger.cpp \
 $${FILA_SRC}/xos/console/main_main.cpp \
 \
 $${libcxxl_SOURCES} \
-$${TEXTA_SRC}/xos/app/console/cxxl/cmain.cxx \
+$${TEXTA_SRC}/xos/app/console/cxxl/ccgimain.cxx \
 
 ########################################################################
-# cxxl FRAMEWORKS
+# cxxlcgi FRAMEWORKS
 #
-cxxl_FRAMEWORKS += \
+cxxlcgi_FRAMEWORKS += \
 $${texta_FRAMEWORKS} \
 
-# cxxl LIBS
+# cxxlcgi LIBS
 #
-cxxl_LIBS += \
+cxxlcgi_LIBS += \
 $${texta_LIBS} \
+
+
