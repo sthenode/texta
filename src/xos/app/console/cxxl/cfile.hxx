@@ -79,6 +79,7 @@ template
   cFILEAttachInterface, cFILEDetachInterface,
   cFILEAttachImplement, cFILEDetachImplement, 
   cFILEAttachedInterface, TImplements> >
+
 class cFILEStreamT: virtual public TImplements, public TExtends {
 public:
     typedef TImplement cImplement;
@@ -95,6 +96,8 @@ public:
     typedef typename cImplements::tUnattached tUnattached;
     enum { vUnattached = cImplements::vUnattached};
 
+    /**********************************************************************
+     **********************************************************************/
     cFILEStreamT(FILE* attached): cExtends(attached) {
     }
     cFILEStreamT() {
@@ -102,6 +105,8 @@ public:
     virtual ~cFILEStreamT() {
     }
 
+    /**********************************************************************
+     **********************************************************************/
     virtual eError Open
     (const char* filename, const char* filemode="r", bool onlyClosed=false) {
         eError error = e_ERROR_FAILED;
@@ -138,44 +143,55 @@ public:
         return error;
     }
 
+    /**********************************************************************
+     **********************************************************************/
     virtual tLength Write(const tWhat* what, tLength length = vUndefinedLength) {
         tLength count = 0;
-        size_t amount;
+        tLength amount;
         FILE* attached;
 
-        if (((tAttached)vUnattached) == (attached = this->Attached()))
+        if (((tAttached)vUnattached) == (attached = this->Attached())) {
             count = -e_ERROR_NOT_ATTACHED;
-        else
-        if (0 > length)
-            for (count = 0; *what != 0; what++, count += length)
-            {
-                if (0 > (length = Write(what, 1)))
-                    return length;
+        } else {
+            if (0 > length) {
+                for (count = 0; *what != 0; ++what, count += length) {
+                    if (1 > (length = FWrite
+                        (what, sizeof(tWhat), 1, attached))) {
+                        return length;
+                    }
+                }
+                return count;
+            } else {
+                if (0 < (length)) {
+                    if (length <= (amount = FWrite
+                        (what, sizeof(tWhat), amount, attached)))
+                        count = amount;
+                    else count = -e_ERROR_WRITE;
+                }
             }
-        else
-        if (0 < (amount = (size_t)(length)))
-        if (length <= (tLength)(amount = FWrite
-            (what, sizeof(tWhat), amount, attached)))
-            count = length;
-        else count = -e_ERROR_WRITE;
+        }
         return count;
     }
     virtual tLength Read(tWhat* what, tSize size) {
         tLength count = 0;
-        size_t amount;
+        tLength amount;
         FILE* attached;
 
-        if (((tAttached)vUnattached) == (attached = this->Attached()))
+        if (((tAttached)vUnattached) == (attached = this->Attached())) {
             count = -e_ERROR_NOT_ATTACHED;
-        else
-        if (0 < (amount = (size_t)(size)))
-        if (size <= (tSize)(amount = FRead
-            (what, sizeof(tWhat), amount, attached)))
-            count = (tLength)(size);
-        else count = -e_ERROR_READ;
+        } else {
+            if (0 < (size)) {
+                if (((tLength)size) <= (amount = FRead
+                    (what, sizeof(tWhat), size, attached)))
+                    count = amount;
+                else count = -e_ERROR_READ;
+            }
+        }
         return count;
     }
 
+    /**********************************************************************
+     **********************************************************************/
     virtual tLength FWrite
     (const tWhat* what, tSize size, tSize length, tAttached attached) const {
         tLength count = 0;
@@ -199,6 +215,8 @@ public:
         return count;
     }
 
+    /**********************************************************************
+     **********************************************************************/
     virtual tAttached FOpen(const char* filename, const char* filemode) const {
         tAttached attached = 0;
         if ((filename) && (filemode)) {
@@ -221,6 +239,9 @@ public:
         }
         return count;
     }
+
+    /**********************************************************************
+     **********************************************************************/
 };
 
 typedef cFILEStreamT
@@ -252,10 +273,15 @@ public:
     typedef TExtends cExtends;
     typedef cFileT cDerives;
     
+    /**********************************************************************
+     **********************************************************************/
     cFileT(FILE* attached): cExtends(attached) {
     }
     cFileT() {
     }
+
+    /**********************************************************************
+     **********************************************************************/
 };
 
 typedef cFileT

@@ -21,7 +21,7 @@
 #include "xos/lib/texta/version.hpp"
 
 #if !defined(XOS_LIB_TEXTA_VERSION_NAME)
-#define XOS_LIB_TEXTA_VERSION_NAME "texta"
+#define XOS_LIB_TEXTA_VERSION_NAME "libtexta"
 #endif /// !defined(XOS_LIB_TEXTA_VERSION_NAME)
 
 #if !defined(XOS_LIB_TEXTA_VERSION_MAJOR)

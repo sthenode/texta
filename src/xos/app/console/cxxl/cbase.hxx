@@ -26,6 +26,10 @@
 #include "xos/base/string.hpp"
 
 #if defined(c_NAMESPACE)
+#undef c_NAMESPACE
+#endif /* defined(c_NAMESPACE) */
+
+#if defined(c_NAMESPACE)
 namespace c_NAMESPACE {
 #endif /* defined(c_NAMESPACE) */
 
