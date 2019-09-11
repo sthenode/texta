@@ -59,6 +59,7 @@ private:
     cCGIMainT(const cCGIMainT &copy) {
     }
 
+protected:
     /**********************************************************************
      **********************************************************************/
     virtual int run(int argc, char_t **argv, char_t **env) {
